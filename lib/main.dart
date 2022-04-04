@@ -38,32 +38,45 @@ class _MainPageState extends State<MainPage> {
   Enum currentPage = screens.LOGIN;
   //pretend JWTtoken. When set, will be put into SharedPreferences
   String? JWTtoken = null;
+  //this is the token we will use in all our API calls
   bool isLoggedIn = false;
   var prefs;
 
   @override
   initState() {
+    //initState gets called when your Widget is added to the Widget tree
+    // State lifecycle method  - like 'DOMContentLoaded'
     //connect to Shared Preferences when the screen is loaded
     () async {
       prefs = await SharedPreferences.getInstance();
       String? token = prefs.getString('JWTtoken');
-      if (JWTtoken != null) {
+      if (token != null) {
         //if token exists then save it and set logged in to true
         setState(
           () {
-            JWTtoken = token;
+            JWTtoken =
+                token; //put from SharedPreferences into State variable JWTtoken
             isLoggedIn = true;
           },
+          //MAKE an API call to see if the token is actually valid
         );
       } else {
         setState(
           () {
             JWTtoken = null;
-            isLoggedIn = true;
+            isLoggedIn = false;
+            //clear the old token from SharedPreferences
           },
         );
       }
     }();
+  }
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+    //clear out SharedPreferences token
   }
 
   @override

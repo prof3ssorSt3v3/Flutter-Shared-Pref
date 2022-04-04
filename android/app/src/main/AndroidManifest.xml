@@ -1,5 +1,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.flutter_shared_pref">
+    <!-- user-permissions go here -->
    <application
         android:label="flutter_shared_pref"
         android:name="${applicationName}"
