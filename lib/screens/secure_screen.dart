@@ -69,6 +69,7 @@ class _SecureScreenState extends State<SecureScreen> {
         ],
       ),
       body: Center(
+        //clear the token state variable in this screen to force calling build again
         child: token == null
             ? Text(
                 'No Soup For You',
